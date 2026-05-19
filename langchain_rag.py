@@ -21,11 +21,12 @@ splitter = RecursiveCharacterTextSplitter(
     chunk_overlap=50
 )
 chunks = splitter.split_documents(documents)
+chunks = [c for c in chunks if c.page_content.strip()]
 print(f"Split into {len(chunks)} chunks")
 
 # Step 3 — Embed and store
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="gemini-embedding-2-preview",
+    model="gemini-embedding-001",
     google_api_key=os.getenv("GEMINI_API_KEY")
 )
 
