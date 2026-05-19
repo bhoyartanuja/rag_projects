@@ -4,3 +4,9 @@ numpy<2
 fastembed
 google-genai
 python-dotenv
+Flask
+langchain
+langchain-community
+langchain-google-genai
+langchain-text-splitters
+langchain-core

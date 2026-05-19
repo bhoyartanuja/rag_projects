@@ -25,6 +25,7 @@ def rag_query(question, top_k=3):
         n_results=top_k
     )
     chunks = results['documents'][0]
+    metadatas = results['metadatas'][0]
     context = "\n\n".join(chunks)
 
     # Step 2 - Generate answer using Gemini
@@ -43,9 +44,19 @@ Answer:"""
         model="gemini-2.5-flash",
         contents=prompt
     )
-    print(f"\n🔍 Question: {question}")
-    print(f"\n🤖 Answer: {response.text}")
-
+    # print(f"\n🔍 Question: {question}")
+    # print(f"\n🤖 Answer: {response.text}")
+    # print(f"\n📄 Sources:")
+    # for m in metadatas:
+        # print(f"   - {m['source']} (page {m['page']})")
+    return {
+        "question": question,
+        "answer": response.text,
+        "sources": [
+            {"source": m["source"], "page": m["page"]}
+            for m in metadatas
+        ]
+    }
 
 if __name__ == "__main__":
     rag_query("what is the date in the document?")
