@@ -1,0 +1,6 @@
+chromadb
+pypdf
+numpy<2
+fastembed
+google-genai
+python-dotenv
